@@ -13,6 +13,7 @@ app.use(helmet());
 // gestion des chemins de fichiers
 const path = require("path");
 
+const sauceRoutes = require("./routes/sauce");
 const userRoutes = require("./routes/user");
 
 //URL de notre base
@@ -42,7 +43,9 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// chemin middleware utilisateurs
+// chemin middleware sauces - utilisateurs - images
+app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api/sauces", sauceRoutes);
 app.use("/api/auth", userRoutes);
 
 module.exports = app;
